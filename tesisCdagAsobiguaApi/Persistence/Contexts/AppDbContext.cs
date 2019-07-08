@@ -36,8 +36,8 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
 
             modelBuilder.Entity<User>().HasMany(p => p.Shots).WithOne(p => p.Player).HasForeignKey(p => p.PlayerId);
             //modelBuilder.Entity<User>().HasMany(p => p.Shots).WithOne(p => p.Trainer).HasForeignKey(p => p.TrainerId);
-            modelBuilder.Entity<User>().HasMany(p => p.Logins).WithOne(p => p.Player).HasForeignKey(p => p.PlayerId);
-            //modelBuilder.Entity<User>().HasMany(p => p.Logins).WithOne(p => p.Trainer).HasForeignKey(p => p.TrainerId);
+            //modelBuilder.Entity<User>().HasMany(p => p.Logins).WithOne(p => p.Player).HasForeignKey(p => p.PlayerId);
+            modelBuilder.Entity<User>().HasMany(p => p.Logins).WithOne(p => p.Trainer).HasForeignKey(p => p.TrainerId);
 
             modelBuilder.Entity<User>().HasData
                 (
@@ -248,7 +248,7 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
 
             modelBuilder.Entity<Login>().ToTable("Logins");
             modelBuilder.Entity<Login>().HasKey(p => p.Id);
-            modelBuilder.Entity<Login>().HasKey(p => p.TimeStamp);
+            modelBuilder.Entity<Login>().Property(p => p.TimeStamp).IsRequired();
 
             modelBuilder.Entity<Login>().HasData
                 (

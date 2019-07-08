@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using tesisCdagAsobiguaApi.Domain.Models;
+using tesisCdagAsobiguaApi.Domain.Services.Communication;
 
 namespace tesisCdagAsobiguaApi.Domain.Services
 {
@@ -14,6 +15,7 @@ namespace tesisCdagAsobiguaApi.Domain.Services
         Task<IEnumerable<Shot>> FindByPlayerUsername(string playerUsername);
         Task<IEnumerable<Shot>> Find(long trainerId, long playerId);
         Task<IEnumerable<Shot>> Find(string trainerUsername, string playerUsername);
-        Task AddAsync(Shot shot);
+        Task<Shot> FindByIdAsync(int id);
+        Task<ObjectResponse<Shot>> SaveAsync(Shot shot);
     }
 }

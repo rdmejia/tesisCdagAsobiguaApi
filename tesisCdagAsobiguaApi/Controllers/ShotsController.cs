@@ -16,20 +16,22 @@ namespace tesisCdagAsobiguaApi.Controllers
     public class ShotsController : Controller
     {
         private readonly IShotService shotService;
+        private readonly ILoginService loginService;
+        private readonly IUserService userService;
         private readonly IMapper mapper;
 
-        private readonly IUserService userService;
 
-        public ShotsController(IShotService shotService, IMapper mapper, IUserService userService)
+        public ShotsController(IShotService shotService, ILoginService loginService, IUserService userService, IMapper mapper)
         {
             this.shotService = shotService;
-            this.mapper = mapper;
+            this.loginService = loginService;
             this.userService = userService;
+            this.mapper = mapper;
         }
 
         // GET v1/values/5
         [HttpGet("trainer/{trainer}/player/{player}")]
-        public async Task<IActionResult> Get(string trainer, string player)
+        public async Task<IActionResult> GetTrainerPlayerShots(string trainer, string player)
         {
             IEnumerable<Shot> shots = await shotService.Find(trainer, player);
 
@@ -42,12 +44,59 @@ namespace tesisCdagAsobiguaApi.Controllers
             return Ok(resource);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetShotById(int id)
+        {
+            var shot = await shotService.FindByIdAsync(id);
+
+            if(shot == null)
+            {
+                return NotFound(new { mesage = $"Shot with id: {id} was not found" });
+            }
+
+            var resource = mapper.Map<Shot, ShotResource>(shot);
+            return Ok(resource);
+        }
+
         // POST v1/values
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody]SaveShotResource resource)
         {
-            await shotService.AddAsync(null);
-            return Ok();
+            var trainer = await userService.FindByUsername(resource.Trainer.Username);
+            var player = await userService.FindByUsername(resource.Player.Username);
+
+            if(trainer == null || player == null)
+            {
+                return NotFound(new { message = "Trainer or player not found", trainer, player });
+            }
+
+            var shot = mapper.Map<SaveShotResource, Shot>(resource);
+            shot.TrainerId = trainer.Id;
+            shot.PlayerId = player.Id;
+            shot.Player = null;
+            shot.Trainer = null;
+
+            var newLogin = new Login { PlayerId = player.Id, TrainerId = trainer.Id, TimeStamp = resource.TimeStamp };
+            var saveLoginResult = await loginService.SaveAsync(newLogin);
+
+            if(!saveLoginResult.Success)
+            {
+                return BadRequest(saveLoginResult);
+            }
+
+            var saveShotResult = await shotService.SaveAsync(shot);
+
+            if(!saveShotResult.Success)
+            {
+                return BadRequest(saveShotResult);
+            }
+
+            saveShotResult.value.Player = player;
+            saveShotResult.value.Trainer = trainer;
+
+            var shotResource = mapper.Map<Shot, ShotResource>(saveShotResult.value);
+
+            return CreatedAtAction(nameof(GetShotById), new { id = shot.Id }, shotResource);
         }
     }
 }

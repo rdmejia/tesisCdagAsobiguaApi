@@ -13,6 +13,10 @@ namespace tesisCdagAsobiguaApi.Mapping
             CreateMap<SaveUserResource, User>()
                 .ForMember(src => src.UserType,
                             opt => opt.MapFrom(src => src.UserType.ToDescriptionString()));
+
+            CreateMap<SaveShotResource, Shot>();
+            CreateMap<SaveXyzShotResource, XyzShot>();
+            CreateMap<SaveUserShotResource, User>();
         }
     }
 }

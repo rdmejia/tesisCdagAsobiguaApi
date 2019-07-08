@@ -15,9 +15,9 @@ namespace tesisCdagAsobiguaApi.Persistence.Repositories
         {
         }
 
-        public Task AddAsync(Shot shot)
+        public async Task AddAsync(Shot shot)
         {
-            throw new NotImplementedException();
+            await context.Shots.AddAsync(shot);
         }
 
         public Task<IEnumerable<Shot>> Find(long trainerId, long playerId)
@@ -35,6 +35,18 @@ namespace tesisCdagAsobiguaApi.Persistence.Repositories
 
             return await shots.Where(shot => shot.Trainer.Username == trainerUsername && shot.Player.Username == playerUsername)
                                .ToListAsync();
+        }
+
+        public async Task<Shot> FindById(int id)
+        {
+            var shots = context.Shots
+                                .Include(p => p.Trainer)
+                                .Include(p => p.Player)
+                                .Include(p => p.XyzShots)
+                                .AsNoTracking();
+
+            var result = await shots.Where(shot => shot.Id == id).SingleOrDefaultAsync();
+            return result;
         }
 
         public Task<IEnumerable<Shot>> FindByPlayerId(long playerId)

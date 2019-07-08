@@ -42,11 +42,13 @@ namespace tesisCdagAsobiguaApi
             // First add repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IShotRepository, ShotRepository>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // Then add services
             services.AddScoped<IUserService, UserServices>();
             services.AddScoped<IShotService, ShotService>();
+            services.AddScoped<ILoginService, LoginService>();
 
             services.AddAutoMapper(typeof(Startup));
         }
