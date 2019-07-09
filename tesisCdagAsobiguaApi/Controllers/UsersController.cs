@@ -79,5 +79,21 @@ namespace tesisCdagAsobiguaApi.Controllers
 
             return CreatedAtAction(nameof(GetByUsername), new { username = result.value.Username }, userResource);
         }
+
+        [HttpPost("login")]
+        [RequireHttps]
+        public async Task<IActionResult> LoginAsync([FromBody] UsersLoginResource resource)
+        {
+            var user = await userService.LoginAsync(resource.Username, resource.Password);
+
+            if(user == null)
+            {
+                return Unauthorized(new { message = "Wrong username or password" });
+            }
+
+            var userResource = mapper.Map<User, UserResource>(user);
+
+            return Ok(userResource);
+        }
     }
 }

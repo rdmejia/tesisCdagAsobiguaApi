@@ -34,6 +34,11 @@ namespace tesisCdagAsobiguaApi.Services
             return await userRepository.ListAsync();
         }
 
+        public async Task<User> LoginAsync(string username, string password)
+        {
+            return await userRepository.LoginAsync(username, password);
+        }
+
         public async Task<ObjectResponse<User>> SaveAsync(User user)
         {
             try

@@ -12,5 +12,6 @@ namespace tesisCdagAsobiguaApi.Domain.Services
         Task<ObjectResponse<User>> SaveAsync(User user);
         Task<User> FindByIdAsync(long id);
         Task<User> FindByUsername(string username);
+        Task<User> LoginAsync(string username, string password);
     }
 }

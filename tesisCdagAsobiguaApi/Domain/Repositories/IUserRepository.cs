@@ -11,5 +11,6 @@ namespace tesisCdagAsobiguaApi.Domain.Repositories
         Task AddAsync(User user);
         Task<User> FindById(long id);
         Task<User> FindByUsername(string username);
+        Task<User> LoginAsync(string username, string password);
     }
 }
