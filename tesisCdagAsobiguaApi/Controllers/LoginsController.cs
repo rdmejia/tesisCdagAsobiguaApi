@@ -48,5 +48,28 @@ namespace tesisCdagAsobiguaApi.Controllers
 
             return Ok(resource);
         }
+
+        [HttpGet("players/{username}")]
+        public async Task<IActionResult> GetPlayersAsync(string username)
+        {
+            var user = await userService.FindByUsername(username);
+
+            if(user == null)
+            {
+                return NotFound(new { message = $"Username {username} was not found" });
+            }
+
+            if (EUserType.Player.Equals(user.UserType))
+            {
+                List<User> users = new List<User> { user };
+
+                return Ok(mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(users));
+            }
+
+            var players = await loginService.ListPlayersForAsync(user);
+            var resource = mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(players);
+            
+            return Ok(resource);
+        }
     }
 }

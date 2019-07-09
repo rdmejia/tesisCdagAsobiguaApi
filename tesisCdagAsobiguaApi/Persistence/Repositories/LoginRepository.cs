@@ -58,6 +58,19 @@ namespace tesisCdagAsobiguaApi.Persistence.Repositories
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<User>> ListPlayersForAsync(User user)
+        {
+            var logins = context.Logins
+                                .Include(p => p.Player)
+                                .AsNoTracking();
+
+            return await logins.Where(login => login.Trainer.Id == user.Id)
+                          .GroupBy(login => login.PlayerId)
+                          .Select(login => login.First())
+                          .Select(login => login.Player)
+                          .ToListAsync();
+        }
+
         public async Task SaveAsync(Login login)
         {
             await context.Logins.AddAsync(login);

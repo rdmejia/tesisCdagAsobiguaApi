@@ -15,5 +15,6 @@ namespace tesisCdagAsobiguaApi.Domain.Repositories
         Task<IEnumerable<Login>> Find(long trainerId, long playerId);
         Task<IEnumerable<Login>> Find(string trainerUsername, string playerUsername);
         Task SaveAsync(Login login);
+        Task<IEnumerable<User>> ListPlayersForAsync(User user);
     }
 }

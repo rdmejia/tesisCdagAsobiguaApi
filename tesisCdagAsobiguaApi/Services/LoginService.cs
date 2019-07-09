@@ -54,6 +54,11 @@ namespace tesisCdagAsobiguaApi.Services
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<User>> ListPlayersForAsync(User user)
+        {
+            return await loginRepository.ListPlayersForAsync(user);
+        }
+
         public async Task<ObjectResponse<Login>> SaveAsync(Login login)
         {
             try
