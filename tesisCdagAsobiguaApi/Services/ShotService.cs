@@ -34,9 +34,9 @@ namespace tesisCdagAsobiguaApi.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Shot>> FindByPlayerUsername(string playerUsername)
+        public async Task<IEnumerable<Shot>> FindByPlayerUsernameAsync(string playerUsername)
         {
-            throw new NotImplementedException();
+            return await shotRepository.FindByPlayerUsernameAsync(playerUsername);
         }
 
         public Task<IEnumerable<Shot>> FindByTrainerId(long trainerId)

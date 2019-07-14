@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace tesisCdagAsobiguaApi.Domain.Models
 {
     public class Shot
     {
+        [Column(TypeName = "BigInt")]
         public int Id { get; set; }
         public double BackstrokePause { get; set; }
         public double ShotInterval { get; set; }

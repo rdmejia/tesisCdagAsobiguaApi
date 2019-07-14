@@ -41,3 +41,6 @@ msbuild.wrn
 *.azurePubxml
 *.pubxml
 *.publishproj
+
+# Ignore production settings
+**/appsettings.json

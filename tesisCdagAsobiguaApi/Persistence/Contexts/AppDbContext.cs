@@ -1,7 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal;
+using tesisCdagAsobiguaApi.Converters;
 using tesisCdagAsobiguaApi.Domain.Models;
+using tesisCdagAsobiguaApi.Extensions;
 
 namespace tesisCdagAsobiguaApi.Persistence.Contexts
 {
@@ -31,7 +33,8 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
             modelBuilder.Entity<User>().HasIndex(p => p.Username).IsUnique();
 
             // REMEMBER TO ENCRYPT
-            modelBuilder.Entity<User>().Property(p => p.Password).IsRequired();
+            modelBuilder.Entity<User>().Property(p => p.Password).HasColumnType("binary(64)").IsRequired();
+            modelBuilder.Entity<User>().Property(p => p.Password).HasConversion(new PasswordEncryptionConverter());
             // REMEMBER TO ENCRYPT
 
             modelBuilder.Entity<User>().HasMany(p => p.Shots).WithOne(p => p.Player).HasForeignKey(p => p.PlayerId);

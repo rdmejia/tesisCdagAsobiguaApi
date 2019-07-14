@@ -44,7 +44,8 @@ namespace tesisCdagAsobiguaApi
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseInMemoryDatabase("tesis-cdag-asobigua-database");
+                //options.UseInMemoryDatabase("tesis-cdag-asobigua-database");
+                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             // First add repositories

@@ -54,9 +54,16 @@ namespace tesisCdagAsobiguaApi.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Shot>> FindByPlayerUsername(string playerUsername)
+        public async Task<IEnumerable<Shot>> FindByPlayerUsernameAsync(string playerUsername)
         {
-            throw new NotImplementedException();
+            var shots = context.Shots
+                                .Include(p => p.Trainer)
+                                .Include(p => p.Player)
+                                .AsNoTracking();
+
+            return await shots.Where(shot => playerUsername.Equals(shot.Player.Username, StringComparison.OrdinalIgnoreCase))
+                                .OrderByDescending(shot => shot.TimeStamp)
+                                .ToListAsync();
         }
 
         public Task<IEnumerable<Shot>> FindByTrainerId(long trainerId)

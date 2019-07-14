@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace tesisCdagAsobiguaApi.Domain.Models
 {
@@ -10,6 +11,8 @@ namespace tesisCdagAsobiguaApi.Domain.Models
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
+
+        [Column(TypeName = "binary(64)")]
         public string Password { get; set; }
         public EUserType UserType { get; set; }
 

@@ -54,7 +54,15 @@ namespace tesisCdagAsobiguaApi.Controllers
         public async Task<IActionResult> PostAsync([FromBody]SaveUserResource resource)
         {
             var userAlreadyExists = (await userService.FindByUsername(resource.Username)) != null;
-            var user = mapper.Map<SaveUserResource, User>(resource);
+            User user;
+            try
+            {
+                user = mapper.Map<SaveUserResource, User>(resource);
+            }
+            catch(AutoMapperMappingException exception)
+            {
+                return BadRequest(new { message = "There was an error with the input", exception = exception.Message });
+            }
 
             if (userAlreadyExists)
             {
