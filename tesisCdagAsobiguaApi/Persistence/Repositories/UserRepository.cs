@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using tesisCdagAsobiguaApi.Domain.Models;
 using tesisCdagAsobiguaApi.Domain.Repositories;
 using tesisCdagAsobiguaApi.Domain.Services.Communication;
+using tesisCdagAsobiguaApi.Extensions;
 using tesisCdagAsobiguaApi.Persistence.Contexts;
 
 namespace tesisCdagAsobiguaApi.Persistence.Repositories
@@ -44,8 +45,8 @@ namespace tesisCdagAsobiguaApi.Persistence.Repositories
         {
             var users = context.Users.AsNoTracking();
 
-            return await users
-                            .Where(user => username.Equals(user.Username, StringComparison.OrdinalIgnoreCase) && password.Equals(user.Password))
+            return await users.Where(user => username.Equals(user.Username, StringComparison.OrdinalIgnoreCase)
+                                            && password.EncryptString().ToByteArrayString().Equals(user.Password))
                             .DefaultIfEmpty(null)
                             .SingleOrDefaultAsync();
         }

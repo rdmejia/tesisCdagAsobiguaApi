@@ -15,7 +15,7 @@ namespace tesisCdagAsobiguaApi.Domain.Repositories
         Task<IEnumerable<Shot>> FindByPlayerUsernameAsync(string playerUsername);
         Task<IEnumerable<Shot>> Find(long trainerId, long playerId);
         Task<IEnumerable<Shot>> Find(string trainerUsername, string playerUsername);
-        Task<Shot> FindById(int id);
+        Task<Shot> FindById(long id);
         Task AddAsync(Shot shot);
     }
 }

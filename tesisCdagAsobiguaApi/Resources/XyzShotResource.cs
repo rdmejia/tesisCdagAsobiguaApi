@@ -5,7 +5,7 @@ namespace tesisCdagAsobiguaApi.Resources
 {
     public class XyzShotResource
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }

@@ -54,7 +54,7 @@ namespace tesisCdagAsobiguaApi.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Shot> FindByIdAsync(int id)
+        public async Task<Shot> FindByIdAsync(long id)
         {
             var result = await shotRepository.FindById(id);
             return result;

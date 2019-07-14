@@ -6,7 +6,7 @@ namespace tesisCdagAsobiguaApi.Resources
 {
     public class ShotResource
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public double BackstrokePause { get; set; }
         public double ShotInterval { get; set; }
         public double Jab { get; set; }
