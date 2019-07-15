@@ -45,8 +45,10 @@ namespace tesisCdagAsobiguaApi.Persistence.Repositories
         {
             var users = context.Users.AsNoTracking();
 
+            var encryptedPassword = password.EncryptString().ToByteArrayString();
+
             return await users.Where(user => username.Equals(user.Username, StringComparison.OrdinalIgnoreCase)
-                                            && password.EncryptString().ToByteArrayString().Equals(user.Password))
+                                            && password.Equals(user.Password))
                             .DefaultIfEmpty(null)
                             .SingleOrDefaultAsync();
         }
