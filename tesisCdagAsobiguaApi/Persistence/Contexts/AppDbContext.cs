@@ -24,7 +24,7 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
 
             modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<User>().HasKey(p => p.Id);
-            modelBuilder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd().HasValueGenerator<InMemoryIntegerValueGenerator<int>>();
+            modelBuilder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<User>().Property(p => p.Name).IsRequired().HasMaxLength(30);
             modelBuilder.Entity<User>().Property(p => p.LastName).IsRequired().HasMaxLength(30);
             modelBuilder.Entity<User>().Property(p => p.Username).IsRequired().HasMaxLength(30);
@@ -42,7 +42,7 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
 
             modelBuilder.Entity<Shot>().ToTable("Shots");
             modelBuilder.Entity<Shot>().HasKey(p => p.Id);
-            modelBuilder.Entity<Shot>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd().HasValueGenerator<InMemoryIntegerValueGenerator<int>>();
+            modelBuilder.Entity<Shot>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Shot>().Property(p => p.Jab).IsRequired();
             modelBuilder.Entity<Shot>().Property(p => p.ShotInterval).IsRequired();
             modelBuilder.Entity<Shot>().Property(p => p.Straightness).IsRequired();
@@ -56,7 +56,7 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
 
             modelBuilder.Entity<XyzShot>().ToTable("XyzShots");
             modelBuilder.Entity<XyzShot>().HasKey(p => p.Id);
-            modelBuilder.Entity<XyzShot>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd().HasValueGenerator<InMemoryIntegerValueGenerator<int>>();
+            modelBuilder.Entity<XyzShot>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<XyzShot>().Property(p => p.X).IsRequired();
             modelBuilder.Entity<XyzShot>().Property(p => p.Y).IsRequired();
             modelBuilder.Entity<XyzShot>().Property(p => p.Z).IsRequired();
