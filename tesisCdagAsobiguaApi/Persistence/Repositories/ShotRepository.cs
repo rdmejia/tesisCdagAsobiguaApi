@@ -37,7 +37,7 @@ namespace tesisCdagAsobiguaApi.Persistence.Repositories
                                .ToListAsync();
         }
 
-        public async Task<Shot> FindById(int id)
+        public async Task<Shot> FindById(long id)
         {
             var shots = context.Shots
                                 .Include(p => p.Trainer)
