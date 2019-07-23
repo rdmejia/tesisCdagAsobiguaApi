@@ -189,7 +189,8 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
                         TimeStamp = DateTime.Now.AddMilliseconds(-5),
                         X = 0.34,
                         Y = -2.35,
-                        Z = 1.55
+                        Z = 1.55,
+                        XyzShotPosition = EXyzShotPosition.Antebrazo
                     },
                     new XyzShot
                     {
@@ -198,7 +199,8 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
                         TimeStamp = DateTime.Now.AddMilliseconds(-4),
                         X = 0.34,
                         Y = -2.35,
-                        Z = 1.55
+                        Z = 1.55,
+                        XyzShotPosition = EXyzShotPosition.Muneca
                     },
                     new XyzShot
                     {
@@ -207,7 +209,8 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
                         TimeStamp = DateTime.Now.AddMilliseconds(-3),
                         X = 0.34,
                         Y = -2.35,
-                        Z = 1.55
+                        Z = 1.55,
+                        XyzShotPosition = EXyzShotPosition.Pierna
                     },
                     new XyzShot
                     {
@@ -216,7 +219,8 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
                         TimeStamp = DateTime.Now.AddMilliseconds(-5),
                         X = 0.34,
                         Y = -2.35,
-                        Z = 1.55
+                        Z = 1.55,
+                        XyzShotPosition = EXyzShotPosition.Muneca
                     },
                     new XyzShot
                     {
@@ -225,7 +229,8 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
                         TimeStamp = DateTime.Now.AddMilliseconds(-5),
                         X = 0.34,
                         Y = -2.35,
-                        Z = 1.55
+                        Z = 1.55,
+                        XyzShotPosition = EXyzShotPosition.Pierna
                     },
                     new XyzShot
                     {
@@ -234,7 +239,8 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
                         TimeStamp = DateTime.Now.AddMilliseconds(-5),
                         X = 0.34,
                         Y = -2.35,
-                        Z = 1.55
+                        Z = 1.55,
+                        XyzShotPosition = EXyzShotPosition.Antebrazo
                     },
                     new XyzShot
                     {
@@ -243,7 +249,8 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
                         TimeStamp = DateTime.Now.AddMilliseconds(-4),
                         X = 1.12,
                         Y = 2.42,
-                        Z = -1.55
+                        Z = -1.55,
+                        XyzShotPosition = EXyzShotPosition.Antebrazo
                     }
                 );
 
