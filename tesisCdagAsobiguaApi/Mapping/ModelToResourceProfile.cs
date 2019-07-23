@@ -15,7 +15,11 @@ namespace tesisCdagAsobiguaApi.Mapping
                             opt => opt.MapFrom(src => src.UserType.ToDescriptionString()));
 
             CreateMap<Shot, ShotResource>();
-            CreateMap<XyzShot, XyzShotResource>();
+
+            CreateMap<XyzShot, XyzShotResource>()
+                .ForMember(src => src.XyzShotPosition,
+                            opt => opt.MapFrom(src => src.XyzShotPosition.ToDescriptionString()));
+
             CreateMap<Login, LoginResource>();
             CreateMap<Shot, ShotsByPlayerResource>();
         }

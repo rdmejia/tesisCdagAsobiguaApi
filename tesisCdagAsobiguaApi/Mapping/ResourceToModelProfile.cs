@@ -11,7 +11,6 @@ namespace tesisCdagAsobiguaApi.Mapping
         public ResourceToModelProfile()
         {
             CreateMap<SaveUserResource, User>();
-
             CreateMap<SaveShotResource, Shot>();
             CreateMap<SaveXyzShotResource, XyzShot>();
             CreateMap<SaveUserShotResource, User>();
