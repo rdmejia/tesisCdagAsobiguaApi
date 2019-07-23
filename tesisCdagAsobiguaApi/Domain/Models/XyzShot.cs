@@ -8,6 +8,7 @@ namespace tesisCdagAsobiguaApi.Domain.Models
         public double Y { get; set; }
         public double Z { get; set; }
         public DateTime TimeStamp { get; set; }
+        public EXyzShotPosition XyzShotPosition { get; set; }
 
         public int ShotId { get; set; }
         public Shot Shot { get; set; }

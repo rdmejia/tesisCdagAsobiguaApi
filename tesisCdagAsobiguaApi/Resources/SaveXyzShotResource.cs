@@ -16,5 +16,8 @@ namespace tesisCdagAsobiguaApi.Resources
 
         [Required]
         public DateTime TimeStamp { get; set; }
+
+        [Required]
+        public string XyzShotPosition { get; set; }
     }
 }

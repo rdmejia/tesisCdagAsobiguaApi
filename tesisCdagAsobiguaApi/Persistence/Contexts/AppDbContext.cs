@@ -178,6 +178,7 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
             modelBuilder.Entity<XyzShot>().Property(p => p.Y).IsRequired();
             modelBuilder.Entity<XyzShot>().Property(p => p.Z).IsRequired();
             modelBuilder.Entity<XyzShot>().Property(p => p.TimeStamp).IsRequired();
+            modelBuilder.Entity<XyzShot>().Property(p => p.XyzShotPosition).IsRequired();
 
             modelBuilder.Entity<XyzShot>().HasData
                 (
