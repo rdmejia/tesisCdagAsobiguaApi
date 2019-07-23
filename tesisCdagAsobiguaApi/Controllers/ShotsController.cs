@@ -58,8 +58,23 @@ namespace tesisCdagAsobiguaApi.Controllers
             return Ok(resource);
         }
 
-        // POST v1/values
-        [HttpPost]
+		[HttpGet("player/{username}")]
+		public async Task<IActionResult> GetShotsByPlayer(string username)
+		{
+			var result = await shotService.FindByPlayerUsernameAsync(username);
+
+			if (result == null || result.Count() <= 0)
+			{
+				return NotFound(new { message = $"Shots were not found for {username}" });
+			}
+
+			var resource = mapper.Map<IEnumerable<Shot>, IEnumerable<ShotsByPlayerResource>>(result);
+
+			return Ok(resource);
+		}
+
+		// POST v1/values
+		[HttpPost]
         public async Task<IActionResult> PostAsync([FromBody]SaveShotResource resource)
         {
             var trainer = await userService.FindByUsername(resource.Trainer.Username);
