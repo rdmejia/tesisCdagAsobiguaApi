@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using tesisCdagAsobiguaApi.Domain.Models;
 using tesisCdagAsobiguaApi.Domain.Repositories;
-using tesisCdagAsobiguaApi.Domain.Services.Communication;
 using tesisCdagAsobiguaApi.Extensions;
 using tesisCdagAsobiguaApi.Persistence.Contexts;
 
@@ -36,9 +35,16 @@ namespace tesisCdagAsobiguaApi.Persistence.Repositories
             return await users.Where(user => username.Equals(user.Username)).DefaultIfEmpty(null).SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<User>> ListAsync()
+        public async Task<IEnumerable<User>> ListAsync(string userType)
         {
-            return await context.Users.AsNoTracking().ToListAsync();
+            var users = context.Users.AsNoTracking();
+
+            if(string.IsNullOrWhiteSpace(userType))
+            {
+                return await users.ToListAsync();
+            }
+
+            return await users.Where(user => userType.Equals(user.UserType.ToString(), StringComparison.OrdinalIgnoreCase)).ToListAsync();
         }
 
         public async Task<User> LoginAsync(string username, string password)

@@ -8,7 +8,7 @@ namespace tesisCdagAsobiguaApi.Domain.Services
 {
     public interface IUserService
     {
-        Task<IEnumerable<User>> ListAsync();
+        Task<IEnumerable<User>> ListAsync(string userType);
         Task<ObjectResponse<User>> SaveAsync(User user);
         Task<User> FindByIdAsync(long id);
         Task<User> FindByUsername(string username);

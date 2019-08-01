@@ -7,7 +7,7 @@ namespace tesisCdagAsobiguaApi.Domain.Repositories
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> ListAsync();
+        Task<IEnumerable<User>> ListAsync(string userType);
         Task AddAsync(User user);
         Task<User> FindById(long id);
         Task<User> FindByUsername(string username);
