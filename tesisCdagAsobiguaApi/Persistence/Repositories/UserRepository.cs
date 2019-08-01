@@ -44,7 +44,7 @@ namespace tesisCdagAsobiguaApi.Persistence.Repositories
                 return await users.ToListAsync();
             }
 
-            return users.Where(user => userType.Equals(user.UserType.ToString(), StringComparison.OrdinalIgnoreCase));
+            return await users.Where(user => userType.Equals(user.UserType.ToString(), StringComparison.OrdinalIgnoreCase)).ToListAsync();
         }
 
         public async Task<User> LoginAsync(string username, string password)
