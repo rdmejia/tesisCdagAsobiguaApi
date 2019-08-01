@@ -26,9 +26,9 @@ namespace tesisCdagAsobiguaApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] string userType)
         {
-            var users = await userService.ListAsync();
+            var users = await userService.ListAsync(userType);
             var resource = mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(users);
 
             return Ok(resource);

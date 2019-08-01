@@ -29,9 +29,9 @@ namespace tesisCdagAsobiguaApi.Services
             return await userRepository.FindByUsername(username);
         }
 
-        public async Task<IEnumerable<User>> ListAsync()
+        public async Task<IEnumerable<User>> ListAsync(string userType)
         {
-            return await userRepository.ListAsync();
+            return await userRepository.ListAsync(userType);
         }
 
         public async Task<User> LoginAsync(string username, string password)
