@@ -41,10 +41,17 @@ namespace tesisCdagAsobiguaApi.Persistence.Repositories
 
             if(string.IsNullOrWhiteSpace(userType))
             {
-                return await users.ToListAsync();
+                return await users.OrderBy(user => user.LastName)
+                    .ThenBy(user => user.Name)
+                    .ThenBy(user => user.Username)
+                    .ToListAsync();
             }
 
-            return await users.Where(user => userType.Equals(user.UserType.ToString(), StringComparison.OrdinalIgnoreCase)).ToListAsync();
+            return await users.Where(user => userType.Equals(user.UserType.ToString(), StringComparison.OrdinalIgnoreCase))
+                .OrderBy(user => user.LastName)
+                .ThenBy(user => user.Name)
+                .ThenBy(user => user.Username)
+                .ToListAsync();
         }
 
         public async Task<User> LoginAsync(string username, string password)
