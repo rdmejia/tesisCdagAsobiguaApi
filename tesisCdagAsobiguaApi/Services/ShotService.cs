@@ -74,5 +74,11 @@ namespace tesisCdagAsobiguaApi.Services
                 return new ObjectResponse<Shot>($"An error ocurred while saving the shot: {ex.Message}");
             }
         }
+
+        public async Task<IEnumerable<Shot>> FindLatestShots(string playerUsername, int count)
+        {
+            // count <= 0 -> all shots
+            return await shotRepository.FindLatestShots(playerUsername, count);
+        }
     }
 }

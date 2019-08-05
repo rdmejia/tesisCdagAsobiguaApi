@@ -22,6 +22,7 @@ namespace tesisCdagAsobiguaApi.Mapping
 
             CreateMap<Login, LoginResource>();
             CreateMap<Shot, ShotsByPlayerResource>();
+            CreateMap<Shot, SingleShotResource>();
         }
     }
 }
