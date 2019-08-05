@@ -80,5 +80,22 @@ namespace tesisCdagAsobiguaApi.Persistence.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<Shot>> FindLatestShots(string playerUsername, int count)
+        {
+            // count <= 0 -> all shots
+            var shots = context.Shots.AsNoTracking();
+            if(count < 1)
+            {
+                return await shots.Where(shot => playerUsername.Equals(shot.Player.Username, StringComparison.OrdinalIgnoreCase))
+                    .OrderByDescending(shot => shot.TimeStamp)
+                    .ToListAsync();
+            }
+
+            return await shots.Where(shot => playerUsername.Equals(shot.Player.Username, StringComparison.OrdinalIgnoreCase))
+                .OrderByDescending(shot => shot.TimeStamp)
+                .Take(count)
+                .ToListAsync();
+        }
     }
 }

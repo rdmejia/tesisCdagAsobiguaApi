@@ -20,7 +20,6 @@ namespace tesisCdagAsobiguaApi.Controllers
         private readonly IUserService userService;
         private readonly IMapper mapper;
 
-
         public ShotsController(IShotService shotService, ILoginService loginService, IUserService userService, IMapper mapper)
         {
             this.shotService = shotService;
@@ -29,7 +28,6 @@ namespace tesisCdagAsobiguaApi.Controllers
             this.mapper = mapper;
         }
 
-        // GET v1/values/5
         [HttpGet("trainer/{trainer}/player/{player}")]
         public async Task<IActionResult> GetTrainerPlayerShots(string trainer, string player)
         {
@@ -63,7 +61,7 @@ namespace tesisCdagAsobiguaApi.Controllers
         {
             var result = await shotService.FindByPlayerUsernameAsync(username);
 
-            if(result == null || result.Count() <= 0)
+            if(result == null || !result.Any())
             {
                 return NotFound(new { message = $"Shots were not found for {username}" });
             }
@@ -73,7 +71,33 @@ namespace tesisCdagAsobiguaApi.Controllers
             return Ok(resource);
         }
 
-        // POST v1/values
+        [HttpGet("player/{username}/history")]
+        public async Task<IActionResult> GetLatestShotsByPlayer(string username, [FromQuery] int? count)
+        {
+            int latest;
+            if (count is null)
+            {
+                latest = 0;
+            }
+            else
+            {
+                latest = (int)count;
+            }
+
+            var result = await shotService.FindLatestShots(username, latest);
+
+            if(result == null || !result.Any())
+            {
+                return NotFound(new { message = $"Shots were not found for {username}" });
+            }
+
+
+            var resource = mapper.Map<IEnumerable<Shot>, IEnumerable<SingleShotResource>>(result);
+
+            return Ok(resource);
+        }
+
+        // POST v1/shots
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody]SaveShotResource resource)
         {
