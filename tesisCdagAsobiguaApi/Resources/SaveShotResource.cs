@@ -31,6 +31,12 @@ namespace tesisCdagAsobiguaApi.Resources
         public double Finish { get; set; }
 
         [Required]
+        public double ImpactX { get; set; }
+
+        [Required]
+        public double ImpactY { get; set; }
+
+        [Required]
         public DateTime TimeStamp { get; set; }
 
         [Required]

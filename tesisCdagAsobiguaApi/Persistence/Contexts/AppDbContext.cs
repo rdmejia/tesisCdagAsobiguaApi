@@ -105,6 +105,8 @@ namespace tesisCdagAsobiguaApi.Persistence.Contexts
             modelBuilder.Entity<Shot>().Property(p => p.FollowThrough).IsRequired();
             modelBuilder.Entity<Shot>().Property(p => p.BackstrokePause).IsRequired();
             modelBuilder.Entity<Shot>().Property(p => p.TimeStamp).IsRequired();
+            modelBuilder.Entity<Shot>().Property(p => p.ImpactX).IsRequired().HasDefaultValue(0);
+            modelBuilder.Entity<Shot>().Property(p => p.ImpactY).IsRequired().HasDefaultValue(0);
             modelBuilder.Entity<Shot>().HasMany(p => p.XyzShots).WithOne(p => p.Shot).HasForeignKey(p => p.ShotId);
 
             modelBuilder.Entity<Shot>().HasData
