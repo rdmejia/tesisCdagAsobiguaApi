@@ -15,6 +15,8 @@ namespace tesisCdagAsobiguaApi.Domain.Models
         public double Straightness { get; set; }
         public double Finesse { get; set; }
         public double Finish { get; set; }
+        public double ImpactX { get; set; }
+        public double ImpactY { get; set; }
         public DateTime TimeStamp { get; set; }
 
         public long TrainerId { get; set; }

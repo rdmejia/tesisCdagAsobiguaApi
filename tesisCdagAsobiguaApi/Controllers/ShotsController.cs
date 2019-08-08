@@ -33,7 +33,7 @@ namespace tesisCdagAsobiguaApi.Controllers
         {
             IEnumerable<Shot> shots = await shotService.Find(trainer, player);
 
-            if(shots == null || shots.Count() <= 0)
+            if(shots == null || !shots.Any())
             {
                 return NotFound(new { message = "No shots were found for the given input", trainer, player });
             }
