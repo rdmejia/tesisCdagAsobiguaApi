@@ -49,6 +49,14 @@ namespace tesisCdagAsobiguaApi.Migrations
 
                     b.Property<double>("FollowThrough");
 
+                    b.Property<double>("ImpactX")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0.0);
+
+                    b.Property<double>("ImpactY")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0.0);
+
                     b.Property<double>("Jab");
 
                     b.Property<long>("PlayerId");
