@@ -71,7 +71,7 @@ namespace tesisCdagAsobiguaApi.Services
             }
             catch(Exception ex)
             {
-                return new ObjectResponse<Shot>($"An error ocurred while saving the shot: {ex.Message}");
+                return new ObjectResponse<Shot>($"Un error ocurrió mientras se intentaba guardar el tiro: {ex.Message}");
             }
         }
 

@@ -41,7 +41,7 @@ namespace tesisCdagAsobiguaApi.Controllers
 
             if(user == null)
             {
-                return NotFound(new { message = $"{username} not found", username });
+                return NotFound(new { message = $"Usuario {username} no encontrado", username });
             }
 
             var resource = mapper.Map<User, UserResource>(user);
@@ -61,7 +61,7 @@ namespace tesisCdagAsobiguaApi.Controllers
             }
             catch(AutoMapperMappingException exception)
             {
-                return BadRequest(new { message = "There was an error with the input", exception = exception.Message });
+                return BadRequest(new { message = "La solicitud contiene un error", exception = exception.Message });
             }
 
             if (userAlreadyExists)
@@ -71,7 +71,7 @@ namespace tesisCdagAsobiguaApi.Controllers
                 return Conflict(
                     new
                     {
-                        message = $"The username {resource.Username} is already taken",
+                        message = $"El usuario {resource.Username} ya existe",
                         user = userResponse
                     });
             }
@@ -96,7 +96,7 @@ namespace tesisCdagAsobiguaApi.Controllers
 
             if(user == null)
             {
-                return Unauthorized(new { message = "Wrong username or password" });
+                return Unauthorized(new { message = "Usuario o password inválidos" });
             }
 
             var userResource = mapper.Map<User, UserResource>(user);

@@ -35,7 +35,7 @@ namespace tesisCdagAsobiguaApi.Controllers
 
             if(shots == null || !shots.Any())
             {
-                return NotFound(new { message = "No shots were found for the given input", trainer, player });
+                return NotFound(new { message = "No se encontraron tiros para los datos ingresados", trainer, player });
             }
 
             var resource = mapper.Map<IEnumerable<Shot>, IEnumerable<ShotResource>>(shots);
@@ -49,7 +49,7 @@ namespace tesisCdagAsobiguaApi.Controllers
 
             if(shot == null)
             {
-                return NotFound(new { mesage = $"Shot with id: {id} was not found" });
+                return NotFound(new { mesage = $" El tiro con id: {id} no fue encontrado" });
             }
 
             var resource = mapper.Map<Shot, ShotResource>(shot);
@@ -63,7 +63,7 @@ namespace tesisCdagAsobiguaApi.Controllers
 
             if(result == null || !result.Any())
             {
-                return NotFound(new { message = $"Shots were not found for {username}" });
+                return NotFound(new { message = $"No se encontraron tiros para {username}" });
             }
 
             var resource = mapper.Map<IEnumerable<Shot>, IEnumerable<ShotsByPlayerResource>>(result);
@@ -88,7 +88,7 @@ namespace tesisCdagAsobiguaApi.Controllers
 
             if(result == null || !result.Any())
             {
-                return NotFound(new { message = $"Shots were not found for {username}" });
+                return NotFound(new { message = $"No se encontraron tiros para {username}" });
             }
 
 
@@ -106,7 +106,7 @@ namespace tesisCdagAsobiguaApi.Controllers
 
             if(trainer == null || player == null)
             {
-                return NotFound(new { message = "Trainer or player not found", trainer, player });
+                return NotFound(new { message = "El entrenador o el jugador no fueron encontrados", trainer, player });
             }
 
             var shot = mapper.Map<SaveShotResource, Shot>(resource);
