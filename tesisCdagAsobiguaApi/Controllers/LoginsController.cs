@@ -34,14 +34,14 @@ namespace tesisCdagAsobiguaApi.Controllers
 
             if(trainer == null)
             {
-                return NotFound(new { message = "Entrenador no encontrado", trainerUsername });
+                return NotFound(new { message = "Trainer was not found", trainerUsername });
             }
 
             var loginsByTrainer = await loginService.FindByTrainerUsernameAsync(trainerUsername);
 
             if(loginsByTrainer == null || loginsByTrainer.Count() <= 0)
             {
-                return NotFound(new { message = "No se encontraron registros para los datos ingresados", trainerUsername });
+                return NotFound(new { message = "No entries were found for the given input", trainerUsername });
             }
 
             var resource = mapper.Map<IEnumerable<Login>, IEnumerable<LoginResource>>(loginsByTrainer);
@@ -56,7 +56,7 @@ namespace tesisCdagAsobiguaApi.Controllers
 
             if(user == null)
             {
-                return NotFound(new { message = $"Usuario {username} no encontrado" });
+                return NotFound(new { message = $"Username {username} was not found" });
             }
 
             if (EUserType.Player.Equals(user.UserType))

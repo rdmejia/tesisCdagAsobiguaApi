@@ -70,7 +70,7 @@ namespace tesisCdagAsobiguaApi.Services
             }
             catch(Exception ex)
             {
-                return new ObjectResponse<Login>($"Un error ocurrió mientras se intentaba guardar el registro de tiro: {ex.Message}");
+                return new ObjectResponse<Login>($"An error ocurred while saving the login: {ex.Message}");
             }
         }
     }
