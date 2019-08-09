@@ -50,7 +50,7 @@ namespace tesisCdagAsobiguaApi.Services
             }
             catch(Exception ex)
             {
-                return new ObjectResponse<User>($"An error ocurred when saving the user: {ex.Message}");
+                return new ObjectResponse<User>($"Ocurrió un error mientras se intentaba guardar la información del usuario: {ex.Message}");
             }
         }
     }
