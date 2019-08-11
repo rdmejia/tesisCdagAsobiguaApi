@@ -37,6 +37,9 @@ namespace tesisCdagAsobiguaApi.Resources
         public double ImpactY { get; set; }
 
         [Required]
+        public string TipSteerDir { get; set; }
+
+        [Required]
         public DateTime TimeStamp { get; set; }
 
         [Required]

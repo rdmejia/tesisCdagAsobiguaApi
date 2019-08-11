@@ -17,6 +17,7 @@ namespace tesisCdagAsobiguaApi.Resources
         public double Finish { get; set; }
         public double ImpactX { get; set; }
         public double ImpactY { get; set; }
+        public string TipSteerDir { get; set; }
         public DateTime TimeStamp { get; set; }
 
         public  UserResource Trainer { get; set; }
