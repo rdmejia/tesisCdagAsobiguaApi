@@ -69,6 +69,12 @@ namespace tesisCdagAsobiguaApi.Migrations
 
                     b.Property<double>("TipSteer");
 
+                    b.Property<string>("TipSteerDir")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(2)
+                        .HasDefaultValue("C");
+
                     b.Property<long>("TrainerId");
 
                     b.HasKey("Id");
