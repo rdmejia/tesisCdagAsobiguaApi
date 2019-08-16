@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -71,20 +72,34 @@ namespace tesisCdagAsobiguaApi.Controllers
             return Ok(resource);
         }
 
-        private static DateTime GetDefaultDate(DateTime? date, DateTime defaultValue)
+        private static DateTime GetDefaultDate(string date, DateTime defaultValue)
         {
             if(date is null)
             {
                 return defaultValue;
             }
-            return (DateTime)date;
+            return DateTime.ParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture);
         }
 
         [HttpGet("player/{username}/history")]
-        public async Task<IActionResult> GetLatestShotsByPlayer(string username, [FromQuery] int? count, [FromQuery] DateTime? fromDate, [FromQuery] DateTime? toDate)
+        public async Task<IActionResult> GetLatestShotsByPlayer(string username, [FromQuery] int? count, [FromQuery] string fromDate, [FromQuery] string toDate)
         {
-            DateTime _fromDate = GetDefaultDate(fromDate, DateTime.MinValue);
-            DateTime _toDate = GetDefaultDate(toDate, DateTime.Now);
+            DateTime _fromDate, _toDate;
+            DateTime now = DateTime.Now;
+            try
+            {
+                _fromDate = GetDefaultDate(fromDate, DateTime.MinValue);
+                _toDate = GetDefaultDate(toDate, now);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { message = $"Formato de fecha inválido", exception = ex.Message });
+            }
+
+            if(DateTime.Compare(now, _toDate) != 0)
+            {
+                _toDate = _toDate.AddHours(23).AddMinutes(59).AddSeconds(59);
+            }
 
             if(DateTime.Compare(_toDate, _fromDate) < 0)
             {

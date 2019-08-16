@@ -78,7 +78,7 @@ namespace tesisCdagAsobiguaApi.Services
         public async Task<IEnumerable<Shot>> FindLatestShots(string playerUsername, int count, DateTime fromDate, DateTime toDate)
         {
             // count <= 0 -> all shots
-            return await shotRepository.FindLatestShots(playerUsername, count);
+            return await shotRepository.FindLatestShots(playerUsername, count, fromDate, toDate);
         }
     }
 }
