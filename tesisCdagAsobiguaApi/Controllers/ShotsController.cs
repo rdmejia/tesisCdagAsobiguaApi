@@ -71,9 +71,26 @@ namespace tesisCdagAsobiguaApi.Controllers
             return Ok(resource);
         }
 
-        [HttpGet("player/{username}/history")]
-        public async Task<IActionResult> GetLatestShotsByPlayer(string username, [FromQuery] int? count)
+        private static DateTime GetDefaultDate(DateTime? date, DateTime defaultValue)
         {
+            if(date is null)
+            {
+                return defaultValue;
+            }
+            return (DateTime)date;
+        }
+
+        [HttpGet("player/{username}/history")]
+        public async Task<IActionResult> GetLatestShotsByPlayer(string username, [FromQuery] int? count, [FromQuery] DateTime? fromDate, [FromQuery] DateTime? toDate)
+        {
+            DateTime _fromDate = GetDefaultDate(fromDate, DateTime.MinValue);
+            DateTime _toDate = GetDefaultDate(toDate, DateTime.Now);
+
+            if(DateTime.Compare(_toDate, _fromDate) < 0)
+            {
+                return BadRequest(new { message = $"Las fecha de inicio es mayor a la fecha de fin" });
+            }
+
             int latest;
             if (count is null)
             {
@@ -84,7 +101,7 @@ namespace tesisCdagAsobiguaApi.Controllers
                 latest = (int)count;
             }
 
-            var result = await shotService.FindLatestShots(username, latest);
+            var result = await shotService.FindLatestShots(username, latest, _fromDate, _toDate);
 
             if(result == null || !result.Any())
             {
